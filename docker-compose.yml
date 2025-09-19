@@ -1,0 +1,78 @@
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: vietnam-guide-app
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - .:/app:cached
+      - node_modules:/app/node_modules
+    ports:
+      - "5173:5173"
+    networks:
+      - vietnam-guide-network
+    environment:
+      - NODE_ENV=development
+      - VITE_APP_NAME=Vietnam Travel Guide
+
+  # Optional: Add database for future content management
+  db:
+    image: mysql:8.0
+    container_name: vietnam-guide-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: vietnam_guide_db
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_USER: vietnam_user
+      MYSQL_PASSWORD: vietnam_password
+    ports:
+      - "3307:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - vietnam-guide-network
+    command: --default-authentication-plugin=mysql_native_password --innodb-buffer-pool-size=256M
+
+  # Optional: Redis for caching
+  redis:
+    image: redis:7-alpine
+    container_name: vietnam-guide-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - vietnam-guide-network
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+
+  # Optional: Database management
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: vietnam-guide-phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root_password
+    ports:
+      - "8081:80"
+    networks:
+      - vietnam-guide-network
+    depends_on:
+      - db
+
+networks:
+  vietnam-guide-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
+  node_modules:
+    driver: local
+  redis_data:
+    driver: local
