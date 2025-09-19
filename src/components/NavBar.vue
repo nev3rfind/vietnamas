@@ -18,7 +18,7 @@
           class="navbar-link"
           :class="{ 'active': $route.path === item.path }"
         >
-          {{ $t(item.label) }}
+          {{ t(item.label) }}
         </router-link>
       </div>
 
@@ -31,7 +31,7 @@
             :key="lang.code"
             @click="switchLanguage(lang.code)"
             class="lang-btn"
-            :class="{ 'active': currentLanguage === lang.code }"
+            :class="{ 'active': locale === lang.code }"
             :title="lang.name"
           >
             <span class="flag">{{ lang.flag }}</span>
@@ -61,7 +61,7 @@
           class="mobile-link"
           @click="closeMobileMenu"
         >
-          {{ $t(item.label) }}
+          {{ t(item.label) }}
         </router-link>
       </div>
     </div>
@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { gsap } from 'gsap'
 
@@ -90,8 +90,6 @@ export default {
       { code: 'en', name: 'English', flag: '🇺🇸' },
       { code: 'lt', name: 'Lietuvių', flag: '🇱🇹' }
     ]
-
-    const currentLanguage = computed(() => locale.value)
 
     const handleScroll = () => {
       isScrolled.value = window.scrollY > 50
@@ -142,7 +140,7 @@ export default {
       isMobileMenuOpen,
       menuItems,
       languages,
-      currentLanguage,
+      locale,
       switchLanguage,
       toggleMobileMenu,
       closeMobileMenu,

@@ -27,8 +27,9 @@ const detectLanguage = () => {
   return 'en' // Default to English
 }
 
-// Create i18n instance
+// Create i18n instance with legacy: false to fix the error
 const i18n = createI18n({
+  legacy: false, // This fixes the "Not available in legacy mode" error
   locale: detectLanguage(),
   fallbackLocale: 'en',
   messages: {
