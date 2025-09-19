@@ -1,0 +1,70 @@
+{
+  "nav": {
+    "home": "HOME",
+    "attractions": "ATTRACTIONS",
+    "placesToEat": "PLACES TO EAT"
+  },
+  "hero": {
+    "title": "Discover Vietnam",
+    "subtitle": "Explore the beauty of Southeast Asia's hidden gem",
+    "description": "From bustling cities to pristine beaches, ancient temples to modern marvels - Vietnam offers an unforgettable journey through culture, cuisine, and natural wonders."
+  },
+  "map": {
+    "title": "Explore Vietnam",
+    "subtitle": "Click on any city to discover more"
+  },
+  "cities": {
+    "hanoi": {
+      "name": "Hanoi",
+      "description": "Vietnam's charming capital blends ancient traditions with modern energy.",
+      "details": "The political and cultural heart of Vietnam, Hanoi captivates visitors with its tree-lined boulevards, French colonial architecture, and vibrant street food scene."
+    },
+    "hochiminh": {
+      "name": "Ho Chi Minh City",
+      "description": "The bustling economic hub of southern Vietnam.",
+      "details": "Formerly Saigon, this dynamic metropolis pulses with energy, offering everything from historic landmarks to cutting-edge cuisine and nightlife."
+    },
+    "danang": {
+      "name": "Da Nang",
+      "description": "Coastal city known for beautiful beaches and modern bridges.",
+      "details": "A perfect blend of urban sophistication and natural beauty, Da Nang serves as the gateway to central Vietnam's UNESCO World Heritage sites."
+    },
+    "hue": {
+      "name": "Hue",
+      "description": "Ancient imperial capital with rich cultural heritage.",
+      "details": "Once the seat of the Nguyen Dynasty, Hue enchants visitors with its imperial citadel, royal tombs, and traditional cuisine."
+    },
+    "hoian": {
+      "name": "Hoi An",
+      "description": "UNESCO World Heritage ancient trading port.",
+      "details": "This perfectly preserved ancient town glows with lanterns at night and offers a magical journey through Vietnam's trading history."
+    },
+    "nhatrang": {
+      "name": "Nha Trang",
+      "description": "Premier beach destination with crystal clear waters.",
+      "details": "Vietnam's premier beach resort destination, famous for its pristine beaches, vibrant nightlife, and excellent seafood."
+    },
+    "phuquoc": {
+      "name": "Phu Quoc",
+      "description": "Tropical island paradise with pristine beaches.",
+      "details": "Vietnam's largest island offers white sand beaches, pepper plantations, and some of the world's most beautiful sunsets."
+    }
+  },
+  "attractions": {
+    "title": "Top Attractions",
+    "subtitle": "Discover Vietnam's most beautiful destinations",
+    "findMore": "Find out more",
+    "close": "Close"
+  },
+  "restaurants": {
+    "title": "Places to Eat",
+    "subtitle": "Savor authentic Vietnamese cuisine",
+    "filterAll": "All Cities",
+    "viewDetails": "View Details"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "backToMap": "Back to Map"
+  }
+}

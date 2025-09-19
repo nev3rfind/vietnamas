@@ -1,0 +1,70 @@
+{
+  "nav": {
+    "home": "PAGRINDINIS",
+    "attractions": "LANKYTINOS VIETOS",
+    "placesToEat": "RESTORANAI"
+  },
+  "hero": {
+    "title": "Atraskite Vietnamą",
+    "subtitle": "Tyrinėkite Pietryčių Azijos paslėptą brangakmenį",
+    "description": "Nuo judančių miestų iki nepaliestos gamtos, nuo senovės šventyklų iki šiuolaikinių stebuklų - Vietnamas siūlo nepamirštamą kelionę per kultūrą, virtuvę ir gamtos stebuklus."
+  },
+  "map": {
+    "title": "Tyrinėkite Vietnamą",
+    "subtitle": "Spustelėkite ant bet kurio miesto, kad sužinotumėte daugiau"
+  },
+  "cities": {
+    "hanoi": {
+      "name": "Hanojus",
+      "description": "Vietnamo žavinga sostinė, sujungianti senovės tradicijas su šiuolaikine energija.",
+      "details": "Vietnamo politikos ir kultūros širdis, Hanojus žavi lankytojus medžiais apaugusiomis alėjomis, prancūzų kolonijine architektūra ir gyvybinga gatvės maisto scena."
+    },
+    "hochiminh": {
+      "name": "Hošimino miestas",
+      "description": "Judrus pietų Vietnamo ekonomikos centras.",
+      "details": "Buvęs Saigonas, šis dinamiškas metropolis kunkuliuoja energija, siūlydamas viską nuo istorinių lankytinų vietų iki pažangios virtuvės ir naktinio gyvenimo."
+    },
+    "danang": {
+      "name": "Danangas",
+      "description": "Pajūrio miestas, garsėjantis gražiais paplūdimiais ir šiuolaikiniais tiltais.",
+      "details": "Tobulas miesto rafinuotumo ir gamtos grožio derinys, Danangas tarnauja kaip vartai į centrinės Vietnamo UNESCO pasaulio paveldo objektus."
+    },
+    "hue": {
+      "name": "Hue",
+      "description": "Senovės imperatoriškoji sostinė su turtingu kultūros paveldu.",
+      "details": "Kadaise buvusi Nguyen dinastijos rezidencija, Hue žavi lankytojus savo imperatoriškąja citadele, karališkaisiais kapais ir tradicine virtuve."
+    },
+    "hoian": {
+      "name": "Hoi Anas",
+      "description": "UNESCO pasaulio paveldo senovės prekybos uostas.",
+      "details": "Šis puikiai išlikęs senovės miestas naktį šviečia žibintais ir siūlo stebuklingą kelionę per Vietnamo prekybos istoriją."
+    },
+    "nhatrang": {
+      "name": "Nha Trangas",
+      "description": "Pagrindinis paplūdimio kurorts su kristalinio skaidrumo vandeniu.",
+      "details": "Vietnamo pagrindinis paplūdimio kurorto miestas, garsėjantis nepaliestos gamtos paplūdimiais, gyvybingu naktiniu gyvenimu ir puikiais jūros gėrybių patiekalais."
+    },
+    "phuquoc": {
+      "name": "Phu Kuokas",
+      "description": "Tropinė salų rojus su nepaliestos gamtos paplūdimiais.",
+      "details": "Didžiausia Vietnamo sala siūlo balto smėlio paplūdimius, pipirų plantacijas ir kai kuriuos gražiausius pasaulyje saulėlydžius."
+    }
+  },
+  "attractions": {
+    "title": "Pagrindinės lankytinos vietos",
+    "subtitle": "Atraskite gražiausias Vietnamo vietas",
+    "findMore": "Sužinoti daugiau",
+    "close": "Uždaryti"
+  },
+  "restaurants": {
+    "title": "Restoranai",
+    "subtitle": "Ragaukite autentiškos vietnamiečių virtuvės",
+    "filterAll": "Visi miestai",
+    "viewDetails": "Peržiūrėti detales"
+  },
+  "common": {
+    "loading": "Kraunama...",
+    "error": "Kažkas nepavyko",
+    "backToMap": "Grįžti į žemėlapį"
+  }
+}
