@@ -19,7 +19,7 @@
           <!-- Load the vietnam_map.svg file -->
           <div class="svg-map-holder">
             <img 
-              src="/vietnam_map.svg" 
+              :src="`${import.meta.env.BASE_URL}vietnam_map.svg`"
               alt="Vietnam Map" 
               class="vietnam-svg-map"
               @load="onMapLoad"
