@@ -1,6 +1,6 @@
 <template>
   <div class="vietnam-map-container" ref="mapContainer">
-    <!-- Glass Background with Floating Effect -->
+    <!-- Glass Background -->
     <div class="glass-background" ref="glassBackground">
       <div class="floating-orbs">
         <div class="orb orb-1"></div>
@@ -15,25 +15,20 @@
       <p class="map-subtitle">{{ $t('map.subtitle') }}</p>
     </div>
 
-    <!-- Three.js Canvas for 3D Effects -->
-    <canvas ref="threeCanvas" class="three-canvas"></canvas>
-
     <!-- Main Map Container -->
     <div class="map-wrapper" ref="mapWrapper">
       <!-- Vietnam SVG Map Container -->
       <div class="svg-map-container" ref="svgContainer">
-        <div class="vietnam-svg-wrapper" 
-             @mousemove="handleMouseMove"
-             @mouseleave="handleMouseLeave">
+        <div class="vietnam-svg-wrapper">
           
-          <!-- Load the actual vietnam.svg file -->
+          <!-- Load the vietnam_map.svg file -->
           <div class="svg-map-holder" v-html="vietnamSvgContent"></div>
           
           <!-- City Markers Overlay -->
           <div class="city-markers-overlay">
             <!-- Hanoi -->
             <div class="city-marker-group" 
-                 :style="{ left: '48%', top: '15%' }"
+                 :style="{ left: '48%', top: '18%' }"
                  data-city="hanoi"
                  @click="showCityPopup('hanoi', $event)">
               <div class="marker-pulse"></div>
@@ -44,7 +39,7 @@
             
             <!-- Hue -->
             <div class="city-marker-group" 
-                 :style="{ left: '52%', top: '35%' }"
+                 :style="{ left: '52%', top: '38%' }"
                  data-city="hue"
                  @click="showCityPopup('hue', $event)">
               <div class="marker-pulse"></div>
@@ -55,7 +50,7 @@
             
             <!-- Da Nang -->
             <div class="city-marker-group" 
-                 :style="{ left: '55%', top: '40%' }"
+                 :style="{ left: '55%', top: '42%' }"
                  data-city="danang"
                  @click="showCityPopup('danang', $event)">
               <div class="marker-pulse"></div>
@@ -66,7 +61,7 @@
             
             <!-- Hoi An -->
             <div class="city-marker-group" 
-                 :style="{ left: '58%', top: '45%' }"
+                 :style="{ left: '58%', top: '46%' }"
                  data-city="hoian"
                  @click="showCityPopup('hoian', $event)">
               <div class="marker-pulse"></div>
@@ -77,7 +72,7 @@
             
             <!-- Nha Trang -->
             <div class="city-marker-group" 
-                 :style="{ left: '54%', top: '60%' }"
+                 :style="{ left: '54%', top: '62%' }"
                  data-city="nhatrang"
                  @click="showCityPopup('nhatrang', $event)">
               <div class="marker-pulse"></div>
@@ -88,7 +83,7 @@
             
             <!-- Ho Chi Minh City -->
             <div class="city-marker-group" 
-                 :style="{ left: '50%', top: '85%' }"
+                 :style="{ left: '50%', top: '82%' }"
                  data-city="hochiminh"
                  @click="showCityPopup('hochiminh', $event)">
               <div class="marker-pulse"></div>
@@ -99,7 +94,7 @@
             
             <!-- Phu Quoc -->
             <div class="city-marker-group" 
-                 :style="{ left: '15%', top: '90%' }"
+                 :style="{ left: '18%', top: '88%' }"
                  data-city="phuquoc"
                  @click="showCityPopup('phuquoc', $event)">
               <div class="marker-pulse"></div>
@@ -163,12 +158,11 @@
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import * as THREE from 'three'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -182,7 +176,6 @@ export default {
     const mapContainer = ref(null)
     const glassBackground = ref(null)
     const mapHeader = ref(null)
-    const threeCanvas = ref(null)
     const mapWrapper = ref(null)
     const svgContainer = ref(null)
     const popup = ref(null)
@@ -191,11 +184,6 @@ export default {
     const selectedCity = ref(null)
     const popupStyle = ref({})
     const vietnamSvgContent = ref('')
-    
-    // Three.js variables
-    let scene, camera, renderer, mapMesh, animationId
-    let mouseX = 0, mouseY = 0
-    let targetRotationX = 0, targetRotationY = 0
 
     // City images
     const cityImages = {
@@ -215,10 +203,10 @@ export default {
     // Load Vietnam SVG
     const loadVietnamSvg = async () => {
       try {
-        const response = await fetch('/vietnam.svg')
+        const response = await fetch('/vietnam_map.svg')
         let svgContent = await response.text()
         
-        // Apply glass styling to the SVG
+        // Apply modern styling to the SVG
         svgContent = svgContent.replace(
           '<svg',
           `<svg class="vietnam-svg-map" style="
@@ -227,11 +215,11 @@ export default {
           "`
         )
         
-        // Add glass effect to paths
+        // Add modern gradients and styling to paths
         svgContent = svgContent.replace(
           /<path/g,
           `<path style="
-            fill: url(#vietnamGlassGradient);
+            fill: url(#vietnamModernGradient);
             stroke: url(#vietnamBorderGradient);
             stroke-width: 2;
             filter: url(#mapGlow);
@@ -242,12 +230,12 @@ export default {
         // Add gradients and filters
         const defsContent = `
           <defs>
-            <linearGradient id="vietnamGlassGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.7" />
-              <stop offset="25%" style="stop-color:#06b6d4;stop-opacity:0.6" />
-              <stop offset="50%" style="stop-color:#10b981;stop-opacity:0.7" />
-              <stop offset="75%" style="stop-color:#f59e0b;stop-opacity:0.6" />
-              <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.7" />
+            <linearGradient id="vietnamModernGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#1e40af;stop-opacity:0.8" />
+              <stop offset="25%" style="stop-color:#3b82f6;stop-opacity:0.7" />
+              <stop offset="50%" style="stop-color:#06b6d4;stop-opacity:0.8" />
+              <stop offset="75%" style="stop-color:#10b981;stop-opacity:0.7" />
+              <stop offset="100%" style="stop-color:#059669;stop-opacity:0.8" />
             </linearGradient>
             
             <linearGradient id="vietnamBorderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -257,8 +245,8 @@ export default {
             </linearGradient>
 
             <filter id="mapGlow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
-              <feOffset in="coloredBlur" dx="0" dy="4" result="offsetBlur"/>
+              <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+              <feOffset in="coloredBlur" dx="0" dy="2" result="offsetBlur"/>
               <feMerge> 
                 <feMergeNode in="offsetBlur"/>
                 <feMergeNode in="SourceGraphic"/>
@@ -271,113 +259,8 @@ export default {
         vietnamSvgContent.value = svgContent
       } catch (error) {
         console.error('Error loading Vietnam SVG:', error)
-        // Fallback SVG if file not found
-        vietnamSvgContent.value = `
-          <svg viewBox="0 0 400 600" class="vietnam-svg-map">
-            <defs>
-              <linearGradient id="vietnamGlassGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.7" />
-                <stop offset="50%" style="stop-color:#10b981;stop-opacity:0.7" />
-                <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.7" />
-              </linearGradient>
-            </defs>
-            <path d="M200 40 L210 42 L225 48 L240 58 L250 70 L258 85 L265 100 L270 118 L275 135 L280 152 L285 170 L290 188 L295 205 L300 222 L305 240 L310 258 L315 275 L320 292 L325 310 L330 328 L335 345 L340 362 L345 380 L350 398 L355 415 L360 432 L365 450 L370 467 L375 485 L380 502 L375 520 L370 537 L365 555 L360 572 L350 585 L335 595 L320 600 L300 598 L280 595 L260 590 L240 583 L220 575 L200 565 L180 553 L160 540 L145 525 L130 508 L118 490 L108 470 L100 450 L95 428 L92 405 L90 382 L88 358 L87 335 L86 312 L85 288 L84 265 L83 242 L82 218 L81 195 L80 172 L79 148 L78 125 L77 102 L76 78 L75 55 L80 45 L90 38 L105 35 L125 36 L145 38 L165 40 L185 41 Z" 
-                  fill="url(#vietnamGlassGradient)" stroke="#1e40af" stroke-width="2"/>
-            <path d="M45 520 L55 518 L65 520 L70 525 L72 532 L70 540 L65 545 L55 547 L45 545 L40 540 L38 532 L40 525 Z" 
-                  fill="url(#vietnamGlassGradient)" stroke="#1e40af" stroke-width="2"/>
-          </svg>
-        `
-      }
-    }
-
-    // Three.js initialization
-    const initThreeJS = () => {
-      if (!threeCanvas.value) return
-
-      scene = new THREE.Scene()
-      
-      camera = new THREE.PerspectiveCamera(75, threeCanvas.value.clientWidth / threeCanvas.value.clientHeight, 0.1, 1000)
-      camera.position.z = 5
-
-      renderer = new THREE.WebGLRenderer({ 
-        canvas: threeCanvas.value, 
-        alpha: true, 
-        antialias: true 
-      })
-      renderer.setSize(threeCanvas.value.clientWidth, threeCanvas.value.clientHeight)
-      renderer.setClearColor(0x000000, 0)
-      renderer.shadowMap.enabled = true
-      renderer.shadowMap.type = THREE.PCFSoftShadowMap
-
-      // Create floating background geometry
-      const geometry = new THREE.PlaneGeometry(8, 10, 32, 32)
-      const material = new THREE.MeshPhongMaterial({
-        color: 0x3b82f6,
-        transparent: true,
-        opacity: 0.05,
-        side: THREE.DoubleSide
-      })
-      
-      mapMesh = new THREE.Mesh(geometry, material)
-      mapMesh.position.z = -1
-      scene.add(mapMesh)
-
-      // Enhanced lighting
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.4)
-      scene.add(ambientLight)
-
-      const directionalLight = new THREE.DirectionalLight(0x3b82f6, 0.6)
-      directionalLight.position.set(10, 10, 5)
-      directionalLight.castShadow = true
-      scene.add(directionalLight)
-
-      const pointLight = new THREE.PointLight(0x10b981, 0.4, 100)
-      pointLight.position.set(-10, -10, 5)
-      scene.add(pointLight)
-
-      animate()
-    }
-
-    const animate = () => {
-      animationId = requestAnimationFrame(animate)
-
-      // Smooth parallax effect
-      targetRotationX += (mouseY - targetRotationX) * 0.02
-      targetRotationY += (mouseX - targetRotationY) * 0.02
-
-      if (mapMesh) {
-        mapMesh.rotation.x = targetRotationX * 0.1
-        mapMesh.rotation.y = targetRotationY * 0.1
-        
-        // Floating animation
-        mapMesh.position.y = Math.sin(Date.now() * 0.001) * 0.2
-        mapMesh.position.x = Math.cos(Date.now() * 0.0008) * 0.1
-      }
-
-      renderer.render(scene, camera)
-    }
-
-    // Mouse interaction
-    const handleMouseMove = (event) => {
-      if (!mapWrapper.value) return
-      
-      const rect = mapWrapper.value.getBoundingClientRect()
-      mouseX = ((event.clientX - rect.left) / rect.width) * 2 - 1
-      mouseY = -((event.clientY - rect.top) / rect.height) * 2 + 1
-
-      // Apply subtle transform to SVG
-      const transform = `perspective(1000px) rotateX(${mouseY * 3}deg) rotateY(${mouseX * 3}deg)`
-      if (svgContainer.value) {
-        svgContainer.value.style.transform = transform
-      }
-    }
-
-    const handleMouseLeave = () => {
-      mouseX = 0
-      mouseY = 0
-      
-      if (svgContainer.value) {
-        svgContainer.value.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)'
+        // Fallback message
+        vietnamSvgContent.value = '<div class="svg-error">Vietnam map loading...</div>'
       }
     }
 
@@ -471,29 +354,11 @@ export default {
       router.push(`/city/${city}`)
     }
 
-    // Resize handler
-    const handleResize = () => {
-      if (!threeCanvas.value || !camera || !renderer) return
-      
-      const width = threeCanvas.value.clientWidth
-      const height = threeCanvas.value.clientHeight
-      
-      camera.aspect = width / height
-      camera.updateProjectionMatrix()
-      renderer.setSize(width, height)
-    }
-
     onMounted(async () => {
       // Load Vietnam SVG first
       await loadVietnamSvg()
-      
-      // Initialize Three.js
-      initThreeJS()
 
-      // Event listeners
-      window.addEventListener('resize', handleResize)
-
-      // Enhanced entrance animations
+      // Enhanced entrance animations (no floating effects)
       const tl = gsap.timeline()
       
       // Header animation
@@ -508,20 +373,18 @@ export default {
         { opacity: 1, scale: 1, duration: 1.2, ease: 'power3.out' }, '-=0.5'
       )
       
-      // Map container animation
+      // Map container animation (static, no floating)
       .fromTo(mapWrapper.value, 
         { 
           opacity: 0, 
-          scale: 0.7, 
-          y: 100,
-          rotationX: 45,
+          scale: 0.9, 
+          y: 50,
           filter: 'blur(20px)'
         },
         { 
           opacity: 1, 
           scale: 1, 
           y: 0,
-          rotationX: 0,
           filter: 'blur(0px)',
           duration: 1.5, 
           ease: 'power3.out'
@@ -557,69 +420,42 @@ export default {
         stagger: 0.3
       })
 
-      // Floating orbs animation
+      // Static orbs animation (no floating)
       gsap.to('.orb-1', {
-        x: 100,
-        y: -50,
-        duration: 8,
+        opacity: 0.4,
+        duration: 3,
         repeat: -1,
         yoyo: true,
         ease: 'power1.inOut'
       })
 
       gsap.to('.orb-2', {
-        x: -80,
-        y: 60,
-        duration: 10,
+        opacity: 0.3,
+        duration: 4,
         repeat: -1,
         yoyo: true,
         ease: 'power1.inOut'
       })
 
       gsap.to('.orb-3', {
-        x: 60,
-        y: 80,
-        duration: 12,
+        opacity: 0.2,
+        duration: 5,
         repeat: -1,
         yoyo: true,
         ease: 'power1.inOut'
       })
-
-      // Subtle floating animation for entire map
-      gsap.to(mapWrapper.value, {
-        y: -15,
-        duration: 4,
-        repeat: -1,
-        yoyo: true,
-        ease: 'power1.inOut'
-      })
-    })
-
-    onUnmounted(() => {
-      window.removeEventListener('resize', handleResize)
-      
-      if (animationId) {
-        cancelAnimationFrame(animationId)
-      }
-      
-      if (renderer) {
-        renderer.dispose()
-      }
     })
 
     return {
       mapContainer,
       glassBackground,
       mapHeader,
-      threeCanvas,
       mapWrapper,
       svgContainer,
       popup,
       selectedCity,
       popupStyle,
       vietnamSvgContent,
-      handleMouseMove,
-      handleMouseLeave,
       showCityPopup,
       closePopup,
       goToCityDetail,
@@ -721,22 +557,11 @@ export default {
   letter-spacing: 0.02em;
 }
 
-.three-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-}
-
 .map-wrapper {
   max-width: 1000px;
   margin: 0 auto;
   position: relative;
   height: 700px;
-  perspective: 1000px;
   z-index: 5;
 }
 
@@ -744,7 +569,6 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 0.3s ease;
   filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.4));
 }
 
@@ -763,6 +587,15 @@ export default {
   width: 100%;
   height: 100%;
   filter: drop-shadow(0 10px 30px rgba(59, 130, 246, 0.2));
+}
+
+.svg-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.2rem;
 }
 
 .city-markers-overlay {
