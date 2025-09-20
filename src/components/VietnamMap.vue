@@ -20,236 +20,95 @@
 
     <!-- Main Map Container -->
     <div class="map-wrapper" ref="mapWrapper">
-      <!-- Vietnam SVG Map -->
+      <!-- Vietnam SVG Map Container -->
       <div class="svg-map-container" ref="svgContainer">
-        <svg 
-          ref="vietnamSvg"
-          class="vietnam-svg-map" 
-          viewBox="0 0 400 600" 
-          xmlns="http://www.w3.org/2000/svg"
-          @mousemove="handleMouseMove"
-          @mouseleave="handleMouseLeave"
-        >
-          <defs>
-            <!-- Enhanced Gradients -->
-            <linearGradient id="vietnamGlassGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.7" />
-              <stop offset="25%" style="stop-color:#06b6d4;stop-opacity:0.6" />
-              <stop offset="50%" style="stop-color:#10b981;stop-opacity:0.7" />
-              <stop offset="75%" style="stop-color:#f59e0b;stop-opacity:0.6" />
-              <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.7" />
-            </linearGradient>
-            
-            <linearGradient id="vietnamBorderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
-              <stop offset="50%" style="stop-color:#0891b2;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
-            </linearGradient>
-
-            <!-- Glass Effect Filters -->
-            <filter id="glassBlur" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="2" result="blur"/>
-              <feOffset in="blur" dx="2" dy="2" result="offset"/>
-              <feMerge>
-                <feMergeNode in="offset"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
-
-            <filter id="mapGlow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
-              <feOffset in="coloredBlur" dx="0" dy="4" result="offsetBlur"/>
-              <feMerge> 
-                <feMergeNode in="offsetBlur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
-
-            <filter id="markerGlow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-              <feMerge> 
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
-
-            <!-- Marker Gradients -->
-            <radialGradient id="markerGradient" cx="50%" cy="30%" r="70%">
-              <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-              <stop offset="30%" style="stop-color:#3b82f6;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
-            </radialGradient>
-
-            <radialGradient id="markerPulse" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.8" />
-              <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0" />
-            </radialGradient>
-          </defs>
+        <div class="vietnam-svg-wrapper" 
+             @mousemove="handleMouseMove"
+             @mouseleave="handleMouseLeave">
           
-          <!-- Vietnam Mainland with Glass Effect -->
-          <path 
-            class="vietnam-mainland glass-map"
-            d="M200 40 L210 42 L225 48 L240 58 L250 70 L258 85 L265 100 L270 118 L275 135 L280 152 L285 170 L290 188 L295 205 L300 222 L305 240 L310 258 L315 275 L320 292 L325 310 L330 328 L335 345 L340 362 L345 380 L350 398 L355 415 L360 432 L365 450 L370 467 L375 485 L380 502 L375 520 L370 537 L365 555 L360 572 L350 585 L335 595 L320 600 L300 598 L280 595 L260 590 L240 583 L220 575 L200 565 L180 553 L160 540 L145 525 L130 508 L118 490 L108 470 L100 450 L95 428 L92 405 L90 382 L88 358 L87 335 L86 312 L85 288 L84 265 L83 242 L82 218 L81 195 L80 172 L79 148 L78 125 L77 102 L76 78 L75 55 L80 45 L90 38 L105 35 L125 36 L145 38 L165 40 L185 41 Z"
-            fill="url(#vietnamGlassGradient)"
-            stroke="url(#vietnamBorderGradient)"
-            stroke-width="3"
-            filter="url(#mapGlow)"
-          />
+          <!-- Load the actual vietnam.svg file -->
+          <div class="svg-map-holder" v-html="vietnamSvgContent"></div>
           
-          <!-- Phu Quoc Island with Glass Effect -->
-          <path 
-            class="phu-quoc-island glass-map"
-            d="M45 520 L55 518 L65 520 L70 525 L72 532 L70 540 L65 545 L55 547 L45 545 L40 540 L38 532 L40 525 Z"
-            fill="url(#vietnamGlassGradient)"
-            stroke="url(#vietnamBorderGradient)"
-            stroke-width="2"
-            filter="url(#mapGlow)"
-          />
-          
-          <!-- City Markers -->
-          <g class="city-markers">
+          <!-- City Markers Overlay -->
+          <div class="city-markers-overlay">
             <!-- Hanoi -->
-            <g class="city-marker-group" data-city="hanoi">
-              <circle 
-                cx="200" cy="120" r="20" 
-                class="marker-pulse" 
-                fill="url(#markerPulse)"
-              />
-              <circle 
-                cx="200" cy="120" r="12" 
-                class="city-marker" 
-                data-city="hanoi"
-                @click="showCityPopup('hanoi', $event)"
-                fill="url(#markerGradient)"
-                stroke="#ffffff"
-                stroke-width="3"
-                filter="url(#markerGlow)"
-              />
-              <circle 
-                cx="200" cy="120" r="4" 
-                class="marker-center" 
-                fill="#ffffff"
-              />
-              <text x="200" y="100" text-anchor="middle" class="city-label">
-                {{ $t('cities.hanoi.name') }}
-              </text>
-            </g>
-            
-            <!-- Ho Chi Minh City -->
-            <g class="city-marker-group" data-city="hochiminh">
-              <circle cx="200" cy="480" r="20" class="marker-pulse" fill="url(#markerPulse)"/>
-              <circle 
-                cx="200" cy="480" r="12" 
-                class="city-marker" 
-                data-city="hochiminh"
-                @click="showCityPopup('hochiminh', $event)"
-                fill="url(#markerGradient)"
-                stroke="#ffffff"
-                stroke-width="3"
-                filter="url(#markerGlow)"
-              />
-              <circle cx="200" cy="480" r="4" class="marker-center" fill="#ffffff"/>
-              <text x="200" y="460" text-anchor="middle" class="city-label">
-                {{ $t('cities.hochiminh.name') }}
-              </text>
-            </g>
-            
-            <!-- Da Nang -->
-            <g class="city-marker-group" data-city="danang">
-              <circle cx="280" cy="280" r="20" class="marker-pulse" fill="url(#markerPulse)"/>
-              <circle 
-                cx="280" cy="280" r="12" 
-                class="city-marker" 
-                data-city="danang"
-                @click="showCityPopup('danang', $event)"
-                fill="url(#markerGradient)"
-                stroke="#ffffff"
-                stroke-width="3"
-                filter="url(#markerGlow)"
-              />
-              <circle cx="280" cy="280" r="4" class="marker-center" fill="#ffffff"/>
-              <text x="280" y="260" text-anchor="middle" class="city-label">
-                {{ $t('cities.danang.name') }}
-              </text>
-            </g>
+            <div class="city-marker-group" 
+                 :style="{ left: '48%', top: '15%' }"
+                 data-city="hanoi"
+                 @click="showCityPopup('hanoi', $event)">
+              <div class="marker-pulse"></div>
+              <div class="city-marker"></div>
+              <div class="marker-center"></div>
+              <div class="city-label">{{ $t('cities.hanoi.name') }}</div>
+            </div>
             
             <!-- Hue -->
-            <g class="city-marker-group" data-city="hue">
-              <circle cx="260" cy="240" r="20" class="marker-pulse" fill="url(#markerPulse)"/>
-              <circle 
-                cx="260" cy="240" r="12" 
-                class="city-marker" 
-                data-city="hue"
-                @click="showCityPopup('hue', $event)"
-                fill="url(#markerGradient)"
-                stroke="#ffffff"
-                stroke-width="3"
-                filter="url(#markerGlow)"
-              />
-              <circle cx="260" cy="240" r="4" class="marker-center" fill="#ffffff"/>
-              <text x="260" y="220" text-anchor="middle" class="city-label">
-                {{ $t('cities.hue.name') }}
-              </text>
-            </g>
+            <div class="city-marker-group" 
+                 :style="{ left: '52%', top: '35%' }"
+                 data-city="hue"
+                 @click="showCityPopup('hue', $event)">
+              <div class="marker-pulse"></div>
+              <div class="city-marker"></div>
+              <div class="marker-center"></div>
+              <div class="city-label">{{ $t('cities.hue.name') }}</div>
+            </div>
+            
+            <!-- Da Nang -->
+            <div class="city-marker-group" 
+                 :style="{ left: '55%', top: '40%' }"
+                 data-city="danang"
+                 @click="showCityPopup('danang', $event)">
+              <div class="marker-pulse"></div>
+              <div class="city-marker"></div>
+              <div class="marker-center"></div>
+              <div class="city-label">{{ $t('cities.danang.name') }}</div>
+            </div>
             
             <!-- Hoi An -->
-            <g class="city-marker-group" data-city="hoian">
-              <circle cx="290" cy="300" r="20" class="marker-pulse" fill="url(#markerPulse)"/>
-              <circle 
-                cx="290" cy="300" r="12" 
-                class="city-marker" 
-                data-city="hoian"
-                @click="showCityPopup('hoian', $event)"
-                fill="url(#markerGradient)"
-                stroke="#ffffff"
-                stroke-width="3"
-                filter="url(#markerGlow)"
-              />
-              <circle cx="290" cy="300" r="4" class="marker-center" fill="#ffffff"/>
-              <text x="290" y="280" text-anchor="middle" class="city-label">
-                {{ $t('cities.hoian.name') }}
-              </text>
-            </g>
+            <div class="city-marker-group" 
+                 :style="{ left: '58%', top: '45%' }"
+                 data-city="hoian"
+                 @click="showCityPopup('hoian', $event)">
+              <div class="marker-pulse"></div>
+              <div class="city-marker"></div>
+              <div class="marker-center"></div>
+              <div class="city-label">{{ $t('cities.hoian.name') }}</div>
+            </div>
             
             <!-- Nha Trang -->
-            <g class="city-marker-group" data-city="nhatrang">
-              <circle cx="270" cy="380" r="20" class="marker-pulse" fill="url(#markerPulse)"/>
-              <circle 
-                cx="270" cy="380" r="12" 
-                class="city-marker" 
-                data-city="nhatrang"
-                @click="showCityPopup('nhatrang', $event)"
-                fill="url(#markerGradient)"
-                stroke="#ffffff"
-                stroke-width="3"
-                filter="url(#markerGlow)"
-              />
-              <circle cx="270" cy="380" r="4" class="marker-center" fill="#ffffff"/>
-              <text x="270" y="360" text-anchor="middle" class="city-label">
-                {{ $t('cities.nhatrang.name') }}
-              </text>
-            </g>
+            <div class="city-marker-group" 
+                 :style="{ left: '54%', top: '60%' }"
+                 data-city="nhatrang"
+                 @click="showCityPopup('nhatrang', $event)">
+              <div class="marker-pulse"></div>
+              <div class="city-marker"></div>
+              <div class="marker-center"></div>
+              <div class="city-label">{{ $t('cities.nhatrang.name') }}</div>
+            </div>
+            
+            <!-- Ho Chi Minh City -->
+            <div class="city-marker-group" 
+                 :style="{ left: '50%', top: '85%' }"
+                 data-city="hochiminh"
+                 @click="showCityPopup('hochiminh', $event)">
+              <div class="marker-pulse"></div>
+              <div class="city-marker"></div>
+              <div class="marker-center"></div>
+              <div class="city-label">{{ $t('cities.hochiminh.name') }}</div>
+            </div>
             
             <!-- Phu Quoc -->
-            <g class="city-marker-group" data-city="phuquoc">
-              <circle cx="55" cy="532" r="20" class="marker-pulse" fill="url(#markerPulse)"/>
-              <circle 
-                cx="55" cy="532" r="12" 
-                class="city-marker" 
-                data-city="phuquoc"
-                @click="showCityPopup('phuquoc', $event)"
-                fill="url(#markerGradient)"
-                stroke="#ffffff"
-                stroke-width="3"
-                filter="url(#markerGlow)"
-              />
-              <circle cx="55" cy="532" r="4" class="marker-center" fill="#ffffff"/>
-              <text x="55" y="512" text-anchor="middle" class="city-label">
-                {{ $t('cities.phuquoc.name') }}
-              </text>
-            </g>
-          </g>
-        </svg>
+            <div class="city-marker-group" 
+                 :style="{ left: '15%', top: '90%' }"
+                 data-city="phuquoc"
+                 @click="showCityPopup('phuquoc', $event)">
+              <div class="marker-pulse"></div>
+              <div class="city-marker"></div>
+              <div class="marker-center"></div>
+              <div class="city-label">{{ $t('cities.phuquoc.name') }}</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -326,12 +185,12 @@ export default {
     const threeCanvas = ref(null)
     const mapWrapper = ref(null)
     const svgContainer = ref(null)
-    const vietnamSvg = ref(null)
     const popup = ref(null)
     
     // State
     const selectedCity = ref(null)
     const popupStyle = ref({})
+    const vietnamSvgContent = ref('')
     
     // Three.js variables
     let scene, camera, renderer, mapMesh, animationId
@@ -351,6 +210,84 @@ export default {
 
     const getCityImage = (city) => {
       return cityImages[city] || cityImages.hanoi
+    }
+
+    // Load Vietnam SVG
+    const loadVietnamSvg = async () => {
+      try {
+        const response = await fetch('/vietnam.svg')
+        let svgContent = await response.text()
+        
+        // Apply glass styling to the SVG
+        svgContent = svgContent.replace(
+          '<svg',
+          `<svg class="vietnam-svg-map" style="
+            filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.4));
+            transition: all 0.4s ease;
+          "`
+        )
+        
+        // Add glass effect to paths
+        svgContent = svgContent.replace(
+          /<path/g,
+          `<path style="
+            fill: url(#vietnamGlassGradient);
+            stroke: url(#vietnamBorderGradient);
+            stroke-width: 2;
+            filter: url(#mapGlow);
+            transition: all 0.4s ease;
+          "`
+        )
+        
+        // Add gradients and filters
+        const defsContent = `
+          <defs>
+            <linearGradient id="vietnamGlassGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.7" />
+              <stop offset="25%" style="stop-color:#06b6d4;stop-opacity:0.6" />
+              <stop offset="50%" style="stop-color:#10b981;stop-opacity:0.7" />
+              <stop offset="75%" style="stop-color:#f59e0b;stop-opacity:0.6" />
+              <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.7" />
+            </linearGradient>
+            
+            <linearGradient id="vietnamBorderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+              <stop offset="50%" style="stop-color:#0891b2;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+            </linearGradient>
+
+            <filter id="mapGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+              <feOffset in="coloredBlur" dx="0" dy="4" result="offsetBlur"/>
+              <feMerge> 
+                <feMergeNode in="offsetBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+        `
+        
+        svgContent = svgContent.replace('<svg', `<svg>${defsContent}`)
+        vietnamSvgContent.value = svgContent
+      } catch (error) {
+        console.error('Error loading Vietnam SVG:', error)
+        // Fallback SVG if file not found
+        vietnamSvgContent.value = `
+          <svg viewBox="0 0 400 600" class="vietnam-svg-map">
+            <defs>
+              <linearGradient id="vietnamGlassGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.7" />
+                <stop offset="50%" style="stop-color:#10b981;stop-opacity:0.7" />
+                <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.7" />
+              </linearGradient>
+            </defs>
+            <path d="M200 40 L210 42 L225 48 L240 58 L250 70 L258 85 L265 100 L270 118 L275 135 L280 152 L285 170 L290 188 L295 205 L300 222 L305 240 L310 258 L315 275 L320 292 L325 310 L330 328 L335 345 L340 362 L345 380 L350 398 L355 415 L360 432 L365 450 L370 467 L375 485 L380 502 L375 520 L370 537 L365 555 L360 572 L350 585 L335 595 L320 600 L300 598 L280 595 L260 590 L240 583 L220 575 L200 565 L180 553 L160 540 L145 525 L130 508 L118 490 L108 470 L100 450 L95 428 L92 405 L90 382 L88 358 L87 335 L86 312 L85 288 L84 265 L83 242 L82 218 L81 195 L80 172 L79 148 L78 125 L77 102 L76 78 L75 55 L80 45 L90 38 L105 35 L125 36 L145 38 L165 40 L185 41 Z" 
+                  fill="url(#vietnamGlassGradient)" stroke="#1e40af" stroke-width="2"/>
+            <path d="M45 520 L55 518 L65 520 L70 525 L72 532 L70 540 L65 545 L55 547 L45 545 L40 540 L38 532 L40 525 Z" 
+                  fill="url(#vietnamGlassGradient)" stroke="#1e40af" stroke-width="2"/>
+          </svg>
+        `
+      }
     }
 
     // Three.js initialization
@@ -429,7 +366,7 @@ export default {
       mouseY = -((event.clientY - rect.top) / rect.height) * 2 + 1
 
       // Apply subtle transform to SVG
-      const transform = `perspective(1000px) rotateX(${mouseY * 5}deg) rotateY(${mouseX * 5}deg)`
+      const transform = `perspective(1000px) rotateX(${mouseY * 3}deg) rotateY(${mouseX * 3}deg)`
       if (svgContainer.value) {
         svgContainer.value.style.transform = transform
       }
@@ -446,8 +383,8 @@ export default {
 
     // Popup functionality
     const showCityPopup = async (city, event) => {
-      const rect = event.target.getBoundingClientRect()
-      const mapRect = vietnamSvg.value.getBoundingClientRect()
+      const rect = event.currentTarget.getBoundingClientRect()
+      const mapRect = mapWrapper.value.getBoundingClientRect()
       
       selectedCity.value = city
       
@@ -482,23 +419,21 @@ export default {
       )
 
       // Enhanced marker animation
-      gsap.to(event.target, {
+      const marker = event.currentTarget.querySelector('.city-marker')
+      gsap.to(marker, {
         scale: 1.3,
         duration: 0.5,
         ease: 'elastic.out(1, 0.3)'
       })
 
       // Animate marker pulse
-      const markerGroup = event.target.closest('.city-marker-group')
-      if (markerGroup) {
-        const pulse = markerGroup.querySelector('.marker-pulse')
-        gsap.to(pulse, {
-          r: 30,
-          opacity: 0.3,
-          duration: 0.6,
-          ease: 'power2.out'
-        })
-      }
+      const pulse = event.currentTarget.querySelector('.marker-pulse')
+      gsap.to(pulse, {
+        scale: 1.5,
+        opacity: 0.3,
+        duration: 0.6,
+        ease: 'power2.out'
+      })
     }
 
     const closePopup = () => {
@@ -525,8 +460,8 @@ export default {
       })
 
       gsap.to('.marker-pulse', {
-        r: 20,
-        opacity: 0.8,
+        scale: 1,
+        opacity: 0.6,
         duration: 0.5,
         ease: 'power2.out'
       })
@@ -548,7 +483,10 @@ export default {
       renderer.setSize(width, height)
     }
 
-    onMounted(() => {
+    onMounted(async () => {
+      // Load Vietnam SVG first
+      await loadVietnamSvg()
+      
       // Initialize Three.js
       initThreeJS()
 
@@ -590,22 +528,6 @@ export default {
         }, '-=0.8'
       )
 
-      // SVG path drawing animation
-      gsap.fromTo('.glass-map', 
-        { 
-          strokeDasharray: 4000,
-          strokeDashoffset: 4000,
-          fillOpacity: 0
-        },
-        { 
-          strokeDashoffset: 0,
-          fillOpacity: 0.7,
-          duration: 3,
-          ease: 'power2.out',
-          delay: 0.5
-        }
-      )
-
       // City markers entrance
       gsap.fromTo('.city-marker-group', 
         { 
@@ -619,14 +541,14 @@ export default {
           y: 0,
           duration: 1, 
           stagger: 0.2,
-          delay: 2.5,
+          delay: 2,
           ease: 'elastic.out(1, 0.5)'
         }
       )
 
       // Continuous pulse animation for markers
       gsap.to('.marker-pulse', {
-        r: 25,
+        scale: 1.2,
         opacity: 0.3,
         duration: 2,
         repeat: -1,
@@ -692,10 +614,10 @@ export default {
       threeCanvas,
       mapWrapper,
       svgContainer,
-      vietnamSvg,
       popup,
       selectedCity,
       popupStyle,
+      vietnamSvgContent,
       handleMouseMove,
       handleMouseLeave,
       showCityPopup,
@@ -768,7 +690,7 @@ export default {
   height: 100px;
   background: radial-gradient(circle, #f59e0b, transparent);
   bottom: 20%;
-  left: 60%;
+  left: 70%;
 }
 
 .map-header {
@@ -826,55 +748,94 @@ export default {
   filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.4));
 }
 
+.vietnam-svg-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.svg-map-holder {
+  width: 100%;
+  height: 100%;
+}
+
 .vietnam-svg-map {
   width: 100%;
   height: 100%;
   filter: drop-shadow(0 10px 30px rgba(59, 130, 246, 0.2));
 }
 
-.glass-map {
-  transition: all 0.4s ease;
-  backdrop-filter: blur(2px);
-}
-
-.glass-map:hover {
-  filter: url(#mapGlow) brightness(1.1);
-  stroke-width: 4;
+.city-markers-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
 }
 
 .city-marker-group {
+  position: absolute;
   cursor: pointer;
+  pointer-events: all;
+  transform: translate(-50%, -50%);
   transition: all 0.3s ease;
 }
 
 .marker-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, rgba(59, 130, 246, 0) 70%);
   opacity: 0.6;
   animation: pulse 3s ease-in-out infinite;
 }
 
 @keyframes pulse {
   0%, 100% { 
-    transform: scale(1); 
+    transform: translate(-50%, -50%) scale(1); 
     opacity: 0.6; 
   }
   50% { 
-    transform: scale(1.2); 
+    transform: translate(-50%, -50%) scale(1.2); 
     opacity: 0.3; 
   }
 }
 
 .city-marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #3b82f6 30%, #1e40af 100%);
+  border: 3px solid #ffffff;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.4));
 }
 
 .city-marker:hover {
-  transform: scale(1.2);
+  transform: translate(-50%, -50%) scale(1.2);
   filter: drop-shadow(0 8px 20px rgba(59, 130, 246, 0.6));
 }
 
 .marker-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
   pointer-events: none;
   animation: sparkle 2s ease-in-out infinite;
 }
@@ -885,13 +846,18 @@ export default {
 }
 
 .city-label {
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 14px;
   font-weight: 700;
-  fill: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.9);
   pointer-events: none;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
   letter-spacing: 0.5px;
   font-family: 'Inter', sans-serif;
+  white-space: nowrap;
 }
 
 /* Glass Popup Styles */
