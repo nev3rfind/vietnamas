@@ -9,11 +9,11 @@ RUN apk add --no-cache \
     curl \
     && rm -rf /var/cache/apk/*
 
-# Copy package files
+# Copy package files first
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci --only=production
+RUN npm install
 
 # Copy application files
 COPY . .
@@ -24,5 +24,5 @@ RUN npm run build
 # Expose port for Vite dev server
 EXPOSE 5173
 
-# For development
+# For development, run dev server
 CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
