@@ -19,7 +19,7 @@
           <!-- Load the vietnam_map.svg file -->
           <div class="svg-map-holder">
             <img 
-              :src="`${import.meta.env.BASE_URL}vietnam_map.svg`"
+              :src="`${baseUrl}vietnam_map.svg`"
               alt="Vietnam Map" 
               class="vietnam-svg-map"
               @load="onMapLoad"
@@ -171,6 +171,9 @@ export default {
   setup() {
     const router = useRouter()
     const { t } = useI18n()
+    
+    // Base URL for assets
+    const baseUrl = import.meta.env.BASE_URL
     
     // Refs
     const mapContainer = ref(null)
@@ -344,7 +347,8 @@ export default {
       getCityImage,
       onMapLoad,
       onMapError,
-      t
+      t,
+      baseUrl
     }
   }
 }
