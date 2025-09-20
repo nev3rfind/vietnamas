@@ -173,7 +173,7 @@ export default {
     const { t } = useI18n()
     
     // Base URL for assets
-    const baseUrl = import.meta.env.BASE_URL
+    const baseUrl = '/src/'
     
     // Refs
     const mapContainer = ref(null)
@@ -409,10 +409,10 @@ export default {
 }
 
 .map-wrapper {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   position: relative;
-  height: 600px;
+  height: 80vh;
   z-index: 5;
   padding: 0 2rem;
 }
@@ -422,9 +422,11 @@ export default {
   width: 100%;
   height: 100%;
   background: white;
-  border-radius: 1.5rem;
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  border-radius: 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   overflow: hidden;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .vietnam-svg-wrapper {
@@ -439,6 +441,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2rem;
 }
 
 .vietnam-svg-map {
@@ -446,7 +449,8 @@ export default {
   max-height: 100%;
   width: auto;
   height: auto;
-  filter: drop-shadow(0 4px 6px rgb(0 0 0 / 0.1));
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.1));
+  transition: all 0.3s ease;
 }
 
 .city-markers-overlay {
@@ -471,8 +475,8 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: rgba(59, 130, 246, 0.2);
   opacity: 0.6;
@@ -483,19 +487,19 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  background: #3b82f6;
-  border: 3px solid #ffffff;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  border: 4px solid #ffffff;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .city-marker:hover {
-  transform: translate(-50%, -50%) scale(1.1);
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  transform: translate(-50%, -50%) scale(1.2);
+  box-shadow: 0 12px 35px rgba(59, 130, 246, 0.6);
 }
 
 .marker-center {
@@ -503,8 +507,8 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #ffffff;
   pointer-events: none;
@@ -512,7 +516,7 @@ export default {
 
 .city-label {
   position: absolute;
-  top: -35px;
+  top: -45px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 14px;
@@ -520,10 +524,12 @@ export default {
   color: #1e293b;
   pointer-events: none;
   white-space: nowrap;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 0.25rem 0.75rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* Modern Popup inspired by Opal Camera */
@@ -534,14 +540,15 @@ export default {
 }
 
 .modern-popup .popup-content {
-  background: white;
-  border-radius: 1rem;
-  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
   overflow: hidden;
-  width: 320px;
+  width: 350px;
   pointer-events: all;
   position: relative;
-  border: 1px solid #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .popup-close {
@@ -553,11 +560,11 @@ export default {
 }
 
 .modern-button {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.5rem;
+  background: rgba(248, 250, 252, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.5);
+  border-radius: 0.75rem;
   color: #64748b;
-  padding: 0.5rem;
+  padding: 0.75rem;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
@@ -565,22 +572,24 @@ export default {
   justify-content: center;
   gap: 0.5rem;
   font-weight: 500;
+  backdrop-filter: blur(10px);
 }
 
 .modern-button:hover {
-  background: #f1f5f9;
-  border-color: #cbd5e1;
+  background: rgba(241, 245, 249, 0.9);
+  border-color: rgba(203, 213, 225, 0.7);
   color: #475569;
+  transform: translateY(-1px);
 }
 
 .popup-close:hover {
-  background: #fef2f2;
-  border-color: #fecaca;
+  background: rgba(254, 242, 242, 0.9);
+  border-color: rgba(254, 202, 202, 0.7);
   color: #dc2626;
 }
 
 .popup-image {
-  height: 160px;
+  height: 180px;
   overflow: hidden;
   position: relative;
 }
@@ -596,42 +605,46 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 50%;
+  height: 60%;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
 }
 
 .popup-info {
-  padding: 1.5rem;
+  padding: 2rem;
 }
 
 .popup-title {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   color: #1e293b;
+  letter-spacing: -0.025em;
 }
 
 .popup-description {
   color: #64748b;
-  margin-bottom: 1.5rem;
-  line-height: 1.5;
-  font-size: 0.875rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  font-size: 0.95rem;
 }
 
 .popup-button.primary {
-  background: #3b82f6;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
   border: 1px solid #3b82f6;
   color: white;
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 2rem;
   font-weight: 600;
   width: 100%;
   justify-content: center;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
 
 .popup-button.primary:hover {
-  background: #2563eb;
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
   border-color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
 }
 
 .popup-overlay {
@@ -645,7 +658,7 @@ export default {
 
 .modern-overlay {
   background: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(8px);
 }
 
 /* Responsive Design */
@@ -655,7 +668,7 @@ export default {
   }
   
   .map-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
   
   .map-subtitle {
@@ -664,21 +677,56 @@ export default {
   }
   
   .map-wrapper {
-    height: 500px;
+    height: 70vh;
     padding: 0 1rem;
   }
   
+  .svg-map-container {
+    border-radius: 1.5rem;
+  }
+  
   .modern-popup .popup-content {
-    width: 280px;
+    width: 300px;
   }
   
   .city-label {
     font-size: 12px;
-    padding: 0.125rem 0.5rem;
+    padding: 0.25rem 0.75rem;
+    top: -35px;
   }
   
   .popup-info {
+    padding: 1.5rem;
+  }
+  
+  .popup-title {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-wrapper {
+    height: 60vh;
+  }
+  
+  .svg-map-holder {
     padding: 1rem;
+  }
+  
+  .city-marker {
+    width: 20px;
+    height: 20px;
+    border-width: 3px;
+  }
+  
+  .marker-center {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .marker-pulse {
+    width: 32px;
+    height: 32px;
   }
 }
 </style>

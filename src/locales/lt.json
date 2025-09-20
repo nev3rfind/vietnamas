@@ -66,5 +66,16 @@
     "loading": "Kraunama...",
     "error": "Kažkas nepavyko",
     "backToMap": "Grįžti į žemėlapį"
+  },
+  "hero": {
+    "scrollDown": "Slinkite žemyn"
+  },
+  "gallery": {
+    "title": "Atraskite Vietnamo grožį",
+    "subtitle": "Nuo senovės šventyklų iki nepaliestos gamtos paplūdimių - tyrinėkite stebuklus, kurie jūsų laukia"
+  },
+  "features": {
+    "title": "Kodėl rinktis Vietnamą",
+    "subtitle": "Patirkite tobulą kultūros, gamtos ir nuotykių derinį"
   }
 }

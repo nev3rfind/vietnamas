@@ -66,5 +66,16 @@
     "loading": "Loading...",
     "error": "Something went wrong",
     "backToMap": "Back to Map"
+  },
+  "hero": {
+    "scrollDown": "Scroll to explore"
+  },
+  "gallery": {
+    "title": "Discover Vietnam's Beauty",
+    "subtitle": "From ancient temples to pristine beaches, explore the wonders that await"
+  },
+  "features": {
+    "title": "Why Choose Vietnam",
+    "subtitle": "Experience the perfect blend of culture, nature, and adventure"
   }
 }
