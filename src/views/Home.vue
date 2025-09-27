@@ -131,7 +131,7 @@ import { useI18n } from 'vue-i18n'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import VietnamMap from '../components/VietnamMap.vue'
-import { useWeddingAPI } from '../composables/useSupabase'
+import { useDatabase } from '../composables/useDatabase'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -143,7 +143,7 @@ export default {
   setup() {
     const { t } = useI18n()
     const route = useRoute()
-    const { getGuestInvitation, trackActivity } = useWeddingAPI()
+    const { getGuestInvitation, trackActivity } = useDatabase()
     
     // Refs
     const heroContent = ref(null)

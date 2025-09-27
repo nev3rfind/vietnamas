@@ -1,6 +1,6 @@
 # Vietnam Travel Guide 🇻🇳
 
-A stunning, interactive Vietnam travel guide built with Vue.js, featuring an animated SVG map, bilingual support (English/Lithuanian), and professional GSAP animations.
+A stunning, interactive Vietnam travel guide built with Vue.js, featuring an animated SVG map, bilingual support (English/Lithuanian), professional GSAP animations, and a comprehensive wedding invitation system.
 
 ## 🌟 Features
 
@@ -11,6 +11,9 @@ A stunning, interactive Vietnam travel guide built with Vue.js, featuring an ani
 - **Modern Navigation** with smooth transitions
 - **City Detail Pages** with galleries and information
 - **Restaurant & Attraction Listings** with filtering
+- **Wedding Invitation System** with personalized guest pages
+- **Database Tracking** and analytics
+- **Interactive Engagement Features** with celebrations
 
 ## 🚀 Quick Start with Docker
 
@@ -33,6 +36,22 @@ A stunning, interactive Vietnam travel guide built with Vue.js, featuring an ani
 3. **Access the application:**
    - **Main App**: http://localhost:5173
    - **Database Admin**: http://localhost:8081 (optional)
+
+### Wedding Invitation System Setup
+
+After starting Docker, the database will automatically be set up with sample wedding invitation data.
+
+**Test Wedding Invitations:**
+- Lithuanian Guest (Jonas): http://localhost:5173/invitation/550e8400-e29b-41d4-a716-446655440001
+- English Guest (Sarah): http://localhost:5173/invitation/550e8400-e29b-41d4-a716-446655440002
+- Already Accepted Guest (Maria): http://localhost:5173/invitation/550e8400-e29b-41d4-a716-446655440003
+- Personalized Homepage: http://localhost:5173/home/550e8400-e29b-41d4-a716-446655440001
+
+**Database Access:**
+- **phpMyAdmin**: http://localhost:8081
+- **Username**: root
+- **Password**: root_password
+- **Database**: vietnam_guide_db
 
 ### Production Setup
 
@@ -60,6 +79,29 @@ A stunning, interactive Vietnam travel guide built with Vue.js, featuring an ani
    ```bash
    npm run build
    ```
+
+## 🎊 Wedding Invitation Features
+
+### Database Architecture
+- **guest_invitations** - Main guest data with unique GUIDs
+- **countries** - Country information with bilingual names
+- **invitation_status** - Status tracking (pending/accepted/rejected)
+- **guest_responses** - Guest questionnaire responses
+- **guest_activities** - Comprehensive activity tracking
+
+### Color Palette
+- **#FFFFF8 (Ivory Crepe)** - Main backgrounds and text
+- **#FCB2A9 (Spring Poppy)** - Primary accent color
+- **#B0D5C0 (English Peal)** - Secondary elements
+- **#989CA0 (Nimble)** - Subtle text and borders
+
+### Interactive Features
+- **Animated typing effects** for greetings
+- **Celebration confetti** on invitation acceptance
+- **Modal questionnaire** with form validation
+- **Address reveal** with smooth scrolling
+- **Comprehensive analytics** tracking
+- **Bilingual support** (English/Lithuanian)
 
 ## 🌍 Multilingual Content Management
 
@@ -145,6 +187,11 @@ CREATE TABLE destination_translations (
 2. Add city data to translation files
 3. Create city detail page content
 
+### Adding New Wedding Guests
+1. Insert new records into `guest_invitations` table
+2. Generate unique GUID for each guest
+3. Set appropriate language and country preferences
+4. Test invitation URL: `/invitation/{guid}`
 ## 📱 Mobile Optimization
 
 The app is fully responsive and optimized for:
@@ -170,6 +217,15 @@ docker-compose up -d --build
 
 # Production deployment
 docker-compose -f docker-compose.prod.yml up -d
+
+# Access database container
+docker-compose exec db mysql -u root -p vietnam_guide_db
+
+# View application logs
+docker-compose logs -f app
+
+# Restart specific service
+docker-compose restart app
 ```
 
 ## 🌐 Environment Variables
@@ -180,6 +236,8 @@ Create a `.env` file for production:
 DB_ROOT_PASSWORD=your_secure_root_password
 DB_PASSWORD=your_secure_password
 NODE_ENV=production
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
 ## 📊 Performance
@@ -188,6 +246,22 @@ NODE_ENV=production
 - **First Contentful Paint**: < 1.5s
 - **Largest Contentful Paint**: < 2.5s
 - **Cumulative Layout Shift**: < 0.1
+
+## 🎯 Testing the Wedding System
+
+### Sample Guest Data
+- **Jonas Petraitis** (Lithuanian) - GUID: 550e8400-e29b-41d4-a716-446655440001
+- **Sarah Johnson** (English) - GUID: 550e8400-e29b-41d4-a716-446655440002
+- **Maria Schmidt** (English, Accepted) - GUID: 550e8400-e29b-41d4-a716-446655440003
+- **Petras Kazlauskas** (Lithuanian) - GUID: 550e8400-e29b-41d4-a716-446655440004
+- **Emma Wilson** (English) - GUID: 550e8400-e29b-41d4-a716-446655440005
+
+### Test Scenarios
+1. **New Invitation**: Visit invitation URL → Accept → Fill questionnaire
+2. **Language Testing**: Test Lithuanian vs English guests
+3. **Analytics**: Check database for tracked activities
+4. **Mobile Testing**: Test responsive design on mobile devices
+5. **Error Handling**: Try invalid GUID to see error page
 
 ## 🤝 Contributing
 

@@ -178,14 +178,14 @@ import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { gsap } from 'gsap'
 import confetti from 'canvas-confetti'
-import { useWeddingAPI } from '../composables/useSupabase'
+import { useDatabase } from '../composables/useDatabase'
 
 export default {
   name: 'WeddingInvitation',
   setup() {
     const route = useRoute()
     const { t, locale } = useI18n()
-    const { getGuestInvitation, updateGuestStatus, submitGuestResponse, trackActivity } = useWeddingAPI()
+    const { getGuestInvitation, updateGuestStatus, submitGuestResponse, trackActivity } = useDatabase()
 
     // Refs
     const invitationContainer = ref(null)
