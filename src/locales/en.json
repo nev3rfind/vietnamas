@@ -77,5 +77,43 @@
   "features": {
     "title": "Why Choose Vietnam",
     "subtitle": "Experience the perfect blend of culture, nature, and adventure"
+  },
+  "wedding": {
+    "title": "Donatas & Trang Wedding",
+    "date": "5th April, 2026",
+    "hello": "Hello",
+    "invitation_text": "we warmly invite you to our wedding in the land of lotus lakes and golden paddies",
+    "location": "Vietnam, Hanoi",
+    "buttons": {
+      "accept": "I'll come",
+      "decline": "Unfortunately no",
+      "curiosity": "Satisfy my curiosity",
+      "answered": "Questions answered :)"
+    },
+    "accepted_text": "I cannot wait to see you at my wedding. It's time to start planning your trip! I'll be delighted if you can answer a few questions :)",
+    "thank_you_text": "Thank you for answering my questions, it's really time to think about it! Feel free to explore the website by checking the links below :",
+    "form": {
+      "days_vietnam": "How many days are you planning to stay in Vietnam?",
+      "flight_date": "When are you planning to buy flight tickets?",
+      "days_before": "How many days before the wedding are you planning to come?",
+      "coming_with": "Whom are you coming with?",
+      "submit": "Submit"
+    },
+    "links": {
+      "reveal_address": "Reveal venue address",
+      "explore_vietnam": "Click here to find out what is waiting for you in Vietnam?",
+      "flight_tickets": "When is the best time to buy tickets?",
+      "flying_from": "Flying from"
+    },
+    "errors": {
+      "not_found": "Invitation doesn't exist :(",
+      "loading": "Loading your invitation...",
+      "required": "This field is required",
+      "min_days": "Please enter at least 1 day"
+    },
+    "venue": {
+      "address": "Wedding Venue Address",
+      "location": "Hanoi Opera House, 1 Trang Tien, Hoan Kiem, Hanoi, Vietnam"
+    }
   }
 }

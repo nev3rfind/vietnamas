@@ -77,5 +77,43 @@
   "features": {
     "title": "Kodėl rinktis Vietnamą",
     "subtitle": "Patirkite tobulą kultūros, gamtos ir nuotykių derinį"
+  },
+  "wedding": {
+    "title": "Donato ir Trang vestuvės",
+    "date": "2026 m. balandžio 5 d.",
+    "hello": "Xin Chào",
+    "invitation_text": "širdingai kviečiame jus į mūsų vestuves lotosų ežerų ir auksinių ryžių laukų žemėje",
+    "location": "Vietnamas, Hanojus",
+    "buttons": {
+      "accept": "Aš ateisiu",
+      "decline": "Deja, ne",
+      "curiosity": "Patenkink mano smalsumą",
+      "answered": "Klausimai atsakyti :)"
+    },
+    "accepted_text": "Negaliu sulaukti jūsų mūsų vestuvėse. Laikas pradėti planuoti kelionę! Būčiau labai dėkinga, jei galėtumėte atsakyti į kelis klausimus :)",
+    "thank_you_text": "Ačiū už atsakymus į mano klausimus, tikrai laikas apie tai pagalvoti! Laisvai naršykite svetainę paspausdami nuorodas žemiau :",
+    "form": {
+      "days_vietnam": "Kiek dienų planuojate praleisti Vietname?",
+      "flight_date": "Kada planuojate pirkti lėktuvo bilietus?",
+      "days_before": "Kiek dienų prieš vestuves planuojate atvykti?",
+      "coming_with": "Su kuo atvykstate?",
+      "submit": "Pateikti"
+    },
+    "links": {
+      "reveal_address": "Atskleisti vietos adresą",
+      "explore_vietnam": "Spauskite čia, kad sužinotumėte, kas jūsų laukia Vietname?",
+      "flight_tickets": "Kada geriausias laikas pirkti bilietus?",
+      "flying_from": "Skrendant iš"
+    },
+    "errors": {
+      "not_found": "Kvietimas neegzistuoja :(",
+      "loading": "Kraunamas jūsų kvietimas...",
+      "required": "Šis laukas yra privalomas",
+      "min_days": "Įveskite bent 1 dieną"
+    },
+    "venue": {
+      "address": "Vestuvių vietos adresas",
+      "location": "Hanojaus operos teatras, 1 Trang Tien, Hoan Kiem, Hanojus, Vietnamas"
+    }
   }
 }

@@ -9,12 +9,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.58.0",
     "@types/three": "^0.180.0",
-    "gsap": "^3.12.2",
+    "@vueuse/core": "^13.9.0",
+    "canvas-confetti": "^1.9.3",
+    "date-fns": "^4.1.0",
+    "gsap": "^3.13.0",
     "three": "^0.180.0",
+    "uuid": "^13.0.0",
     "vue": "^3.4.0",
     "vue-i18n": "^9.8.0",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
