@@ -13,6 +13,7 @@ import Home from './views/Home.vue'
 import Attractions from './views/Attractions.vue'
 import PlacesToEat from './views/PlacesToEat.vue'
 import CityDetail from './views/CityDetail.vue'
+import WeddingInvitation from './views/WeddingInvitation.vue'
 
 // Detect user language based on geolocation (simplified)
 const detectLanguage = () => {
@@ -43,9 +44,11 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', name: 'Home', component: Home },
+    { path: '/home/:uuid', name: 'PersonalizedHome', component: Home, props: true },
     { path: '/attractions', name: 'Attractions', component: Attractions },
     { path: '/places-to-eat', name: 'PlacesToEat', component: PlacesToEat },
-    { path: '/city/:id', name: 'CityDetail', component: CityDetail, props: true }
+    { path: '/city/:id', name: 'CityDetail', component: CityDetail, props: true },
+    { path: '/invitation/:guid', name: 'WeddingInvitation', component: WeddingInvitation, props: true }
   ]
 })
 

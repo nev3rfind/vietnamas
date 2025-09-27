@@ -1,5 +1,10 @@
 <template>
   <div class="home">
+    <!-- Personalized Header for Wedding Guests -->
+    <div v-if="isPersonalized" class="personalized-header">
+      <p class="personalized-text">Page dedicated to {{ guestName }}</p>
+    </div>
+
     <!-- Hero Section with Glass Design -->
     <section class="hero-section glass-hero">
       <div class="hero-background">
@@ -121,10 +126,12 @@
 
 <script>
 import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import VietnamMap from '../components/VietnamMap.vue'
+import { useWeddingAPI } from '../composables/useSupabase'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -135,6 +142,8 @@ export default {
   },
   setup() {
     const { t } = useI18n()
+    const route = useRoute()
+    const { getGuestInvitation, trackActivity } = useWeddingAPI()
     
     // Refs
     const heroContent = ref(null)
@@ -153,6 +162,10 @@ export default {
     const featuresSection = ref(null)
     const featuresHeader = ref(null)
     const featuresGrid = ref(null)
+    
+    // Wedding guest personalization
+    const isPersonalized = ref(false)
+    const guestName = ref('')
 
     const galleryPhotos = [
       {
@@ -216,6 +229,28 @@ export default {
       }
     ]
 
+    // Check if this is a personalized page for a wedding guest
+    const checkPersonalization = async () => {
+      const userUuid = route.params.uuid
+      if (userUuid) {
+        try {
+          const { data, error } = await getGuestInvitation(userUuid)
+          if (data && !error) {
+            isPersonalized.value = true
+            guestName.value = data.guest_call
+            
+            // Track homepage visit
+            await trackActivity(data.id, 'homepage_visit', 0, {
+              timestamp: new Date().toISOString(),
+              referrer: document.referrer
+            })
+          }
+        } catch (err) {
+          console.error('Error checking personalization:', err)
+        }
+      }
+    }
+
     const scrollToMap = () => {
       mapSection.value?.scrollIntoView({ 
         behavior: 'smooth',
@@ -224,6 +259,8 @@ export default {
     }
 
     onMounted(() => {
+      checkPersonalization()
+      
       // Enhanced hero animations
       const heroTl = gsap.timeline()
       
@@ -386,6 +423,8 @@ export default {
       featuresGrid,
       galleryPhotos,
       features,
+      isPersonalized,
+      guestName,
       scrollToMap,
       t
     }
@@ -396,6 +435,29 @@ export default {
 <style scoped>
 .home {
   overflow-x: hidden;
+}
+
+/* Personalized Header */
+.personalized-header {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: rgba(252, 178, 169, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 2rem;
+  padding: 1rem 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.personalized-text {
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* Hero Section with Glass Design */
