@@ -1,6 +1,6 @@
 # Vietnam Travel Guide 🇻🇳
 
-A stunning, interactive Vietnam travel guide built with Vue.js, featuring an animated SVG map, bilingual support (English/Lithuanian), professional GSAP animations, and a comprehensive wedding invitation system.
+A stunning, interactive Vietnam travel guide built with Vue.js, featuring an animated SVG map, bilingual support (English/Lithuanian), professional GSAP animations, and a **production-ready boutique wedding invitation system**.
 
 ## 🌟 Features
 
@@ -12,7 +12,7 @@ A stunning, interactive Vietnam travel guide built with Vue.js, featuring an ani
 - **City Detail Pages** with galleries and information
 - **Restaurant & Attraction Listings** with filtering
 - **Wedding Invitation System** with personalized guest pages
-- **Database Tracking** and analytics
+- **Production-Ready Wedding Invites** with boutique design
 - **Interactive Engagement Features** with celebrations
 
 ## 🚀 Quick Start with Docker
@@ -41,11 +41,14 @@ A stunning, interactive Vietnam travel guide built with Vue.js, featuring an ani
 
 After starting Docker, the database will automatically be set up with sample wedding invitation data.
 
-**Test Wedding Invitations:**
-- Lithuanian Guest (Jonas): http://localhost:5173/invitation/550e8400-e29b-41d4-a716-446655440001
-- English Guest (Sarah): http://localhost:5173/invitation/550e8400-e29b-41d4-a716-446655440002
-- Already Accepted Guest (Maria): http://localhost:5173/invitation/550e8400-e29b-41d4-a716-446655440003
+**🎊 Test Wedding Invitations (Production-Ready):**
+- Lithuanian Guest (Jonas): http://localhost:5173/invite/550e8400-e29b-41d4-a716-446655440001
+- English Guest (Sarah): http://localhost:5173/invite/550e8400-e29b-41d4-a716-446655440002
+- Already Accepted Guest (Maria): http://localhost:5173/invite/550e8400-e29b-41d4-a716-446655440003
 - Personalized Homepage: http://localhost:5173/home/550e8400-e29b-41d4-a716-446655440001
+
+**🎨 Upload Hero Background:**
+Place your `hero-background-watercolor.png` file in `/public/assets/` directory for the wedding invitation background.
 
 **Database Access:**
 - **phpMyAdmin**: http://localhost:8081
@@ -82,6 +85,35 @@ After starting Docker, the database will automatically be set up with sample wed
 
 ## 🎊 Wedding Invitation Features
 
+### 🎨 Boutique Design System
+- **Elegant Typography**: Great Vibes script font for headings, Montserrat for body text
+- **Watercolor Hero Background**: Custom background with focal positioning (desktop: 40% 30%, mobile: 50% 70%)
+- **Wedding Color Palette**: 
+  - Ivory Crepe (#FFFFF8) - Main backgrounds
+  - Spring Poppy (#FCB2A9) - Primary accents
+  - English Pear (#B0D5C0) - Secondary elements  
+  - Nimble (#989CA0) - Subtle text
+- **No Glassmorphism**: Clean, natural paper-like design on invite pages
+- **Paper Texture Overlay**: Subtle texture for premium feel
+
+### ✨ Interactive Features
+- **Live Countdown Timer**: Real-time countdown to wedding date (April 5th, 2025)
+- **Animated Greeting**: GSAP TextPlugin typing "Hello" → "Xin Chào" → Guest name
+- **RSVP State Machine**: Single button that morphs through states (no duplicate buttons)
+- **Celebration Confetti**: Canvas-based celebration with hearts and balloons
+- **Questions Modal**: Elegant form with validation and smooth animations
+- **Venue Reveal**: Smooth scroll and reveal animation for wedding address
+- **Country Flags**: Dynamic flags with bilingual country names
+
+### 🎯 Technical Excellence
+- **Route-Level Layout**: `/invite/{guid}` uses InviteLayout (no navigation)
+- **Single Page Flow**: Natural scrolling without cards or glass panels
+- **GSAP Animations**: TextPlugin, ScrollTrigger, and smooth transitions
+- **Accessibility**: ARIA labels, focus management, reduced motion support
+- **Mobile Optimized**: Responsive design with touch-friendly interactions
+- **Performance**: Optimized animations and efficient state management
+- **Error Handling**: Graceful fallbacks and user-friendly error messages
+
 ### Database Architecture
 - **guest_invitations** - Main guest data with unique GUIDs
 - **countries** - Country information with bilingual names
@@ -89,19 +121,21 @@ After starting Docker, the database will automatically be set up with sample wed
 - **guest_responses** - Guest questionnaire responses
 - **guest_activities** - Comprehensive activity tracking
 
-### Color Palette
-- **#FFFFF8 (Ivory Crepe)** - Main backgrounds and text
-- **#FCB2A9 (Spring Poppy)** - Primary accent color
-- **#B0D5C0 (English Peal)** - Secondary elements
-- **#989CA0 (Nimble)** - Subtle text and borders
-
-### Interactive Features
 - **Animated typing effects** for greetings
 - **Celebration confetti** on invitation acceptance
 - **Modal questionnaire** with form validation
 - **Address reveal** with smooth scrolling
 - **Comprehensive analytics** tracking
 - **Bilingual support** (English/Lithuanian)
+
+### 🎊 Wedding Invitation Testing
+
+1. **Accept Invitation** → See confetti celebration
+2. **Fill Questions** → Modal form with validation
+3. **Reveal Address** → Smooth scroll to venue section
+4. **Language Testing** → Test Lithuanian vs English guests
+5. **Mobile Testing** → Responsive design on all devices
+6. **Analytics** → Check database for tracked activities
 
 ## 🌍 Multilingual Content Management
 
@@ -226,6 +260,12 @@ docker-compose logs -f app
 
 # Restart specific service
 docker-compose restart app
+
+# Clean restart with fresh database
+docker-compose down -v
+docker-compose up -d --build
+
+docker-compose restart app
 ```
 
 ## 🌐 Environment Variables
@@ -251,15 +291,15 @@ VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 
 ### Sample Guest Data
 - **Jonas Petraitis** (Lithuanian) - GUID: 550e8400-e29b-41d4-a716-446655440001
-- **Sarah Johnson** (English) - GUID: 550e8400-e29b-41d4-a716-446655440002
+- **Sarah Johnson** (English) - GUID: 550e8400-e29b-41d4-a716-446655440002  
 - **Maria Schmidt** (English, Accepted) - GUID: 550e8400-e29b-41d4-a716-446655440003
 - **Petras Kazlauskas** (Lithuanian) - GUID: 550e8400-e29b-41d4-a716-446655440004
 - **Emma Wilson** (English) - GUID: 550e8400-e29b-41d4-a716-446655440005
 
 ### Test Scenarios
-1. **New Invitation**: Visit invitation URL → Accept → Fill questionnaire
+1. **New Invitation**: Visit `/invite/{guid}` → Accept → Fill questionnaire
 2. **Language Testing**: Test Lithuanian vs English guests
-3. **Analytics**: Check database for tracked activities
+3. **Analytics**: Check phpMyAdmin for tracked activities
 4. **Mobile Testing**: Test responsive design on mobile devices
 5. **Error Handling**: Try invalid GUID to see error page
 
@@ -270,6 +310,12 @@ VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 3. Make your changes
 4. Test thoroughly
 5. Submit a pull request
+
+## 🎨 Wedding Invitation Setup
+
+1. **Upload Background**: Place `hero-background-watercolor.png` in `/public/assets/`
+2. **Test Invitations**: Use the provided sample GUIDs
+3. **Admin Settings**: Access phpMyAdmin to modify wedding date/time
 
 ## 📄 License
 

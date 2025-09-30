@@ -81,23 +81,39 @@
   "wedding": {
     "title": "Donato ir Trang vestuvės",
     "date": "2026 m. balandžio 5 d.",
+    "location": "Vietnamas, Hanojus",
     "hello": "Xin Chào",
     "invitation_text": "širdingai kviečiame jus į mūsų vestuves lotosų ežerų ir auksinių ryžių laukų žemėje",
-    "location": "Vietnamas, Hanojus",
+    "accepted_text": "Negalime sulaukti jūsų mūsų vestuvėse. Laikas pradėti planuoti kelionę! Būčiau labai dėkinga, jei galėtumėte atsakyti į kelis klausimus :)",
+    "thank_you_text": "Ačiū už atsakymus į mano klausimus, laisvai naršykite svetainę paspausdami nuorodas žemiau:",
+    "rejected_message": "Suprantame ir vertiname jūsų sąžiningumą. Visada būsite mūsų širdyse.",
+    "flight_info_coming_soon": "Skrydžių informacijos funkcija netrukus!",
+    "countdown": {
+      "days": "Dienos",
+      "hours": "Valandos",
+      "minutes": "Minutės", 
+      "seconds": "Sekundės"
+    },
     "buttons": {
       "accept": "Aš ateisiu",
       "decline": "Deja, ne",
       "curiosity": "Patenkink mano smalsumą",
       "answered": "Klausimai atsakyti :)"
     },
-    "accepted_text": "Negaliu sulaukti jūsų mūsų vestuvėse. Laikas pradėti planuoti kelionę! Būčiau labai dėkinga, jei galėtumėte atsakyti į kelis klausimus :)",
-    "thank_you_text": "Ačiū už atsakymus į mano klausimus, tikrai laikas apie tai pagalvoti! Laisvai naršykite svetainę paspausdami nuorodas žemiau :",
     "form": {
+      "title": "Papasakokite apie savo kelionę",
       "days_vietnam": "Kiek dienų planuojate praleisti Vietname?",
       "flight_date": "Kada planuojate pirkti lėktuvo bilietus?",
       "days_before": "Kiek dienų prieš vestuves planuojate atvykti?",
       "coming_with": "Su kuo atvykstate?",
-      "submit": "Pateikti"
+      "coming_with_placeholder": "Šeima, draugai, partneris...",
+      "submit": "Pateikti",
+      "submitting": "Siunčiama...",
+      "errors": {
+        "days_required": "Prašome įvesti dienų skaičių",
+        "date_required": "Prašome pasirinkti datą", 
+        "days_before_required": "Prašome įvesti dienas prieš vestuves"
+      }
     },
     "links": {
       "reveal_address": "Atskleisti vietos adresą",
@@ -105,15 +121,19 @@
       "flight_tickets": "Kada geriausias laikas pirkti bilietus?",
       "flying_from": "Skrendant iš"
     },
+    "venue": {
+      "title": "Vestuvių vieta",
+      "address": "Hanojaus operos teatras",
+      "location": "1 Trang Tien, Hoan Kiem, Hanojus, Vietnamas"
+    },
+    "footer": {
+      "dedicated": "Šis puslapis skirtas {name}"
+    },
     "errors": {
       "not_found": "Kvietimas neegzistuoja :(",
       "loading": "Kraunamas jūsų kvietimas...",
       "required": "Šis laukas yra privalomas",
       "min_days": "Įveskite bent 1 dieną"
     },
-    "venue": {
-      "address": "Vestuvių vietos adresas",
-      "location": "Hanojaus operos teatras, 1 Trang Tien, Hoan Kiem, Hanojus, Vietnamas"
-    }
   }
 }

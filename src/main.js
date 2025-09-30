@@ -13,7 +13,10 @@ import Home from './views/Home.vue'
 import Attractions from './views/Attractions.vue'
 import PlacesToEat from './views/PlacesToEat.vue'
 import CityDetail from './views/CityDetail.vue'
-import WeddingInvitation from './views/WeddingInvitation.vue'
+import WeddingInvite from './views/WeddingInvite.vue'
+
+// Import layouts
+import InviteLayout from './layouts/InviteLayout.vue'
 
 // Detect user language based on geolocation (simplified)
 const detectLanguage = () => {
@@ -48,11 +51,21 @@ const router = createRouter({
     { path: '/attractions', name: 'Attractions', component: Attractions },
     { path: '/places-to-eat', name: 'PlacesToEat', component: PlacesToEat },
     { path: '/city/:id', name: 'CityDetail', component: CityDetail, props: true },
-    { path: '/invitation/:guid', name: 'WeddingInvitation', component: WeddingInvitation, props: true }
+    { 
+      path: '/invite/:invite_guid', 
+      name: 'WeddingInvite', 
+      component: WeddingInvite, 
+      props: true,
+      meta: { layout: 'invite' }
+    }
   ]
 })
 
 const app = createApp(App)
+
+// Register layouts globally
+app.component('InviteLayout', InviteLayout)
+
 app.use(router)
 app.use(i18n)
 app.mount('#app')

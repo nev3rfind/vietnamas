@@ -81,23 +81,39 @@
   "wedding": {
     "title": "Donatas & Trang Wedding",
     "date": "5th April, 2026",
+    "location": "Vietnam, Hanoi",
     "hello": "Hello",
     "invitation_text": "we warmly invite you to our wedding in the land of lotus lakes and golden paddies",
-    "location": "Vietnam, Hanoi",
+    "accepted_text": "We cannot wait to see you at our wedding. It's time to start planning your trip! I'll be delighted if you can answer a few questions :)",
+    "thank_you_text": "Thank you for answering my questions, feel free to explore the website by checking the links below:",
+    "rejected_message": "We understand and appreciate your honesty. You'll always be in our hearts.",
+    "flight_info_coming_soon": "Flight information feature coming soon!",
+    "countdown": {
+      "days": "Days",
+      "hours": "Hours", 
+      "minutes": "Minutes",
+      "seconds": "Seconds"
+    },
     "buttons": {
       "accept": "I'll come",
       "decline": "Unfortunately no",
       "curiosity": "Satisfy my curiosity",
       "answered": "Questions answered :)"
     },
-    "accepted_text": "I cannot wait to see you at my wedding. It's time to start planning your trip! I'll be delighted if you can answer a few questions :)",
-    "thank_you_text": "Thank you for answering my questions, it's really time to think about it! Feel free to explore the website by checking the links below :",
     "form": {
+      "title": "Tell us about your journey",
       "days_vietnam": "How many days are you planning to stay in Vietnam?",
       "flight_date": "When are you planning to buy flight tickets?",
       "days_before": "How many days before the wedding are you planning to come?",
       "coming_with": "Whom are you coming with?",
-      "submit": "Submit"
+      "coming_with_placeholder": "Family, friends, partner...",
+      "submit": "Submit",
+      "submitting": "Submitting...",
+      "errors": {
+        "days_required": "Please enter the number of days",
+        "date_required": "Please select a date",
+        "days_before_required": "Please enter days before wedding"
+      }
     },
     "links": {
       "reveal_address": "Reveal venue address",
@@ -105,15 +121,19 @@
       "flight_tickets": "When is the best time to buy tickets?",
       "flying_from": "Flying from"
     },
+    "venue": {
+      "title": "Wedding Venue",
+      "address": "Hanoi Opera House",
+      "location": "1 Trang Tien, Hoan Kiem, Hanoi, Vietnam"
+    },
+    "footer": {
+      "dedicated": "This page is dedicated to {name}"
+    },
     "errors": {
       "not_found": "Invitation doesn't exist :(",
       "loading": "Loading your invitation...",
       "required": "This field is required",
       "min_days": "Please enter at least 1 day"
     },
-    "venue": {
-      "address": "Wedding Venue Address",
-      "location": "Hanoi Opera House, 1 Trang Tien, Hoan Kiem, Hanoi, Vietnam"
-    }
   }
 }
